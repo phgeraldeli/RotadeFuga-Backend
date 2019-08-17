@@ -6,6 +6,7 @@ routes.get('/', (req,res) => {
     return res.json( { message: `Olá: ${req.query.name}`});
 })
 
-routes.post('/usuario', usuarioController.store)
+routes.post('/usuario/create', usuarioController.store);
+routes.put('/usuario/update', usuarioController.update);
 
 module.exports = routes;
