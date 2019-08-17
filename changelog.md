@@ -12,3 +12,8 @@
 ### Adicionado
 - Criacao do changelog
 - Iniciando versionamento
+
+## [1.0.2] - 17/08/2019
+
+### Adicionado
+- Finalizando CRUD usuario
