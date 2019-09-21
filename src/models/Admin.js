@@ -2,7 +2,6 @@ const config = require('config');
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const mongoose = require('mongoose');
-const Localidade = require('./Localidade');
 
 const AdminSchema = new mongoose.Schema({
     user: {
@@ -18,7 +17,20 @@ const AdminSchema = new mongoose.Schema({
         maxlength: 20
     },
     localidade: {
-        type: Localidade,
+        type: { bairro: {
+            type: String,
+            required: true,
+        },
+        cidade: {
+            type: String,
+            required: true,
+        },
+        estado: {
+            type: String,
+            required: true,
+            minlength: 2,
+            maxlength: 2,
+        } },
         required: true
     }
 });
@@ -30,7 +42,7 @@ AdminSchema.methods.generateAuthToken = function() {
 
 const Admin = mongoose.model('Admin', AdminSchema);
 
-validateAdmin(admin) = () => {
+function validateAdmin(admin) {
     const schema = {
         user: Joi.string().min(3).max(20).required(),
         password: Joi.string().min(8).max(20).required()
