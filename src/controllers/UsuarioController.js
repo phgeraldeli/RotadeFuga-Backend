@@ -11,11 +11,11 @@ module.exports = {
             longitude
         })
 
-        return res.json(req.body);        
+        return res.json(req.body);
     },
 
     async update(req, res) {
-        
+
         const { nome, latitude, longitude } = req.body;
 
         await Usuario.update({
