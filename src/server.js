@@ -1,16 +1,28 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const routes = require('./routes');
-
-
 const server = express();
+const authRoute = require('./auth');
+const dotenv = require('dotenv');
 
-mongoose.connect('mongodb+srv://admin:admin@cluster0-jbxjg.mongodb.net/RotadeFugaDatabase', 
-{
-    useNewUrlParser: true
-});
+dotenv.config();
+
+//Connect to db
+mongoose.connect(
+    process.env.DB_CONNECT,
+    {
+        useNewUrlParser: true
+    }).then(() => {
+        console.log("Connected to MongoDB...");
+    }).catch(err => {
+        console.error("Could not connect to MongoDB");
+    }
+    );
 
 server.use(express.json());
 server.use(routes);
 
-server.listen(3333);
+//Routes Middlewares
+server.use('/api/user', authRoute);
+
+server.listen(3333, () => console.log('Server up and running'));
