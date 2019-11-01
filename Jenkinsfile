@@ -1,32 +1,28 @@
-node('node') {
+pipeline {
+    
+    agent any
 
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
 
-    currentBuild.result = "SUCCESS"
+        stage('Install') {
+            steps {
+              sh 'node -v'
+              sh 'npm install'
+            }
+        }
 
-    try {
-
-       stage('Checkout'){
-          checkout scm
-       }
-
-       stage('Install') {
-         sh 'node -v'
-         sh 'npm install'
-       }
-
-       stage('Test'){
-
-         env.NODE_ENV = "test"
-
-         print "Environment will be : ${env.NODE_ENV}"
-
-         sh 'npm prune'
-         sh 'npm test'
-
-       }
-
+        stage('Testing') {
+          steps {
+            sh 'npm prune'
+            sh 'npm test'
+          }
+        }
 
     }
-
 }
 
