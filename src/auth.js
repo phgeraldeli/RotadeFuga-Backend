@@ -4,7 +4,7 @@ const {
   registerValidation,
   loginValidation
 } = require("./controllers/Validation");
-const bcrypt = require("bcrypt");
+const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 router.post("/register", async (req, res) => {
@@ -16,8 +16,8 @@ router.post("/register", async (req, res) => {
   const userExist = await Admin.findOne({ user: req.body.user });
   if (userExist) return res.status(400).send("User Already Exists");
 
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(req.body.password, salt);
+  const salt = await bcryptjs.genSalt(10);
+  const hashedPassword = await bcryptjs.hash(req.body.password, salt);
 
   //CREATE A NEW ADMIN
   const admin = new Admin({
@@ -44,7 +44,7 @@ router.post("/login", async (req, res) => {
   if (!user) return res.status(400).send("User does not exists");
 
   //PASSWORD IS CORRECT
-  const validPassword = await bcrypt.compare(req.body.password, user.password);
+  const validPassword = await bcryptjs.compare(req.body.password, user.password);
   if (!validPassword) return res.status(400).send("Invalid Password");
 
   // Create and assign a token

@@ -13,18 +13,18 @@ pipeline {
             }
         }
 
-        stage('Example') {
+        stage('Config') {
           steps {
             sh 'npm config ls'
+            sh 'npm install -g yarn'
           }
         }
 
-        // stage('Install') {
-        //     steps {
-        //       sh 'node -v'
-        //       sh 'npm install'
-        //     }
-        // }
+        stage('Install') {
+            steps {
+              sh 'yarn install'
+            }
+        }
 
         // stage('Testing') {
         //   steps {
