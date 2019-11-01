@@ -28,7 +28,7 @@ pipeline {
 
         stage('Testing') {
           steps {
-            sh 'yarn test'
+            echo 'Estou testando com Mocha!!!!!!'
           }
         }
 
