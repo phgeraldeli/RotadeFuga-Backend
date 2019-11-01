@@ -13,19 +13,25 @@ pipeline {
             }
         }
 
-        stage('Install') {
-            steps {
-              sh 'node -v'
-              sh 'npm install'
-            }
-        }
-
-        stage('Testing') {
+        stage('Example') {
           steps {
-            sh 'npm prune'
-            sh 'npm test'
+            sh 'npm config ls'
           }
         }
+
+        // stage('Install') {
+        //     steps {
+        //       sh 'node -v'
+        //       sh 'npm install'
+        //     }
+        // }
+
+        // stage('Testing') {
+        //   steps {
+        //     sh 'npm prune'
+        //     sh 'npm test'
+        //   }
+        // }
 
     }
 }
