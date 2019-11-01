@@ -28,7 +28,6 @@ pipeline {
 
         stage('Testing') {
           steps {
-            sh 'yarn prune'
             sh 'yarn test'
           }
         }
