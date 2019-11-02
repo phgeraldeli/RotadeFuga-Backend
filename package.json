@@ -5,7 +5,8 @@
   "repository": "https://github.com/phgeraldeli/RotadeFuga-Backend.git",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "start": "nodemon src/server.js"
   },
   "dependencies": {
     "@hapi/joi": "15.0.3",
