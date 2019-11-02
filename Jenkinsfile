@@ -33,7 +33,8 @@ pipeline {
             }
           }
           steps {
-            sh '.src/script/deploy'
+            sh 'chmod 755 src/script/deploy.sh'
+            sh 'src/script/deploy.sh'
           }
         }
 
