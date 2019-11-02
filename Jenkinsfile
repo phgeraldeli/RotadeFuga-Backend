@@ -27,6 +27,11 @@ pipeline {
         }
 
         stage('Deploy') {
+          when {
+            anyOf {
+              branch 'master'
+            }
+          }
           steps {
             sh './script/deploy'
           }
