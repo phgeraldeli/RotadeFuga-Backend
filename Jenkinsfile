@@ -33,7 +33,7 @@ pipeline {
             }
           }
           steps {
-            sh './script/deploy'
+            sh '.src/script/deploy'
           }
         }
 
