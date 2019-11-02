@@ -33,11 +33,18 @@ pipeline {
             }
           }
           steps {
-            sh 'chmod 755 src/script/deploy.sh'
-            sh 'src/script/deploy.sh'
+            deploy()
           }
         }
 
     }
 }
 
+
+def deploy() {
+  sh 'ssh root@18.191.40.166'
+  sh 'curl -o-   https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash'
+  sh '. ~/.nvm/nvm.sh'
+  sh 'npm install -g nodemon pm2'
+  sh 'pm2 restart ecosystem.config.js'
+}
