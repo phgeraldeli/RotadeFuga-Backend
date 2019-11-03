@@ -43,6 +43,8 @@ pipeline {
 
 def deploy() {
   sh 'ssh -tt root@18.191.40.166'
+  sh 'cd ~/RotadeFuga-Backend'
+  sh 'git pull origin master'
   sh 'curl -o-   https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash'
   sh '. ~/.nvm/nvm.sh'
   sh 'npm install -g nodemon pm2'
