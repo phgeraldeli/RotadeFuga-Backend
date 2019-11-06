@@ -26,3 +26,4 @@ server.use(routes);
 server.use('/api/user', authRoute);
 
 server.listen(3333, () => console.log('Server up and running'));
+module.exports = server; //for testing
