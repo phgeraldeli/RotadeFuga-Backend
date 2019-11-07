@@ -18,11 +18,11 @@ const expect = chai.expect;
 chai.use(chaiHttp);
 
 describe('Requests de Usuario', function(){
-/*  beforeEach(function(done){ //Before each test we empty the database
-        Usuario.remove({}, (err) => {
+  beforeEach(function(done){ //Before each test we empty the database
+        Usuario.deleteMany({}, (err) => {
            done();
         });
-    });*/
+    });
   describe('/Get all users', function(){
     it('should return an array of users', function(done){
       chai.request(server)
