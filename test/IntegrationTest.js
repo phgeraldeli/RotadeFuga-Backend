@@ -41,12 +41,13 @@ describe('Requests de Usuario', function(){
           latitude: 123,
           longitude: 321
         }
-        chai.request(server);
+        chai.request(server)
             .post('/usuario')
             .send(user)
             .end(function(err, res){
               expect(res).to.have.status(200);
-
+              expect(res.body).to.be.an('object');
+              done();
             });
       });
     });
