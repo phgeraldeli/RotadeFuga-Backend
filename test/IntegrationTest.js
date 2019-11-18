@@ -58,7 +58,7 @@ describe('Requests de Usuario', function(){
         chai.request(server)
             .post('/usuario')
             .send(user)
-            .end(function(err, res){
+            .end((err,res) => {
               expect(res).to.have.status(200);
               expect(res.body).to.have.property('errors');
               expect(res.body.errors).to.have.property('pages');
@@ -70,14 +70,18 @@ describe('Requests de Usuario', function(){
     });
     describe('/Get:id', function(){
       it('Should return an specific user by id', function(done){
-        let user = new Usuario({nome: 'testdude', latitude: 666, longitude: 666});
-        user.save((err, book) => {
+        let user = new Usuario({nome: 'testdude',
+                                latitude: 666,
+                                longitude: 666
+                              });
+        user.save((err, user) => {
           chai.request(server)
               .get('/usuario/'+ user.id)
               .send(user)
               .end(function(err, res){
                 expect(res).to.have.status(200);
-                expect(res.body._id).to.be.eql('user.id');//AssertionError
+                expect(res.body._id).to.be.eql(user.id);
+                done();
           });
         });
       });
