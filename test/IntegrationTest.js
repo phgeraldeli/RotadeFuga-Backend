@@ -13,7 +13,7 @@ const chaiHttp = require('chai-http');
 const server = require('../src/server.js');
 const mongoose = require('mongoose');
 const usuarioController = require('../src/controllers/UsuarioController.js');
-const jasmine = require('jasmine');
+const should = chai.should;
 
 const expect = chai.expect;
 chai.use(chaiHttp);
@@ -109,7 +109,7 @@ describe('Requests de Usuario', function () {
         longitude: 321
       };
       oldUser.save((err, user) => {
-        chai.request(server).put('/usuario/' + user.id).send(newUser).end((err,res) => {
+        chai.request(server).put('/usuario/' + user.id).send(newUser).end((err, res) => {
           expect(res).to.have.status(200);
           expect(res.body).to.be.an('object');
           expect(res.body.nome).to.be.eql(newUser.nome)
@@ -127,7 +127,7 @@ describe('Requests de Usuario', function () {
         longitude: 321
       }
       oldUser.save((err, user) => {
-        chai.request(server).put('/usuario/' + user.id).send(invalidUser).end((err,res) => {
+        chai.request(server).put('/usuario/' + user.id).send(invalidUser).end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.body.message).to.be.eql('Content cannot be empty');
           done();
@@ -135,12 +135,11 @@ describe('Requests de Usuario', function () {
       })
     });
 
-    it('should not update a user given the invalid id', (done) => { 
-      jasmine.spyOn()
+    it('should not update a user given the invalid id', (done) => {
 
       oldUser.save((err, user) => {
-        chai.request(server).put('/usuario/' + 'idInvalidooooooooooo').send(usuario).end((err,res) => {
-          
+        chai.request(server).put('/usuario/' + 'idInvalidooooooooooo').send(usuario).end((err, res) => {
+
           expect(res).to.have.status(404);
           expect(res.body.message).to.be.eql('Usuario not found with id idInvalidooooooooooo');
           done();
