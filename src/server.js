@@ -12,7 +12,10 @@ mongoose.connect(
     process.env.DB_CONNECT,
     {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+        keepAlive: true,
+        useCreateIndex: true,
     }).then(() => {
         console.log("Connected to MongoDB...");
     }).catch(err => {
