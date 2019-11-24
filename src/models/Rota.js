@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const RotaSchema = new Schema({
+const Ponto = new Schema({
   latitude: {
     type: Number,
     required: true,
@@ -8,11 +8,11 @@ const RotaSchema = new Schema({
   longitude: {
     type: Number,
     required: true
-  },
-  rota_id: {
-    type: Number,
-    required: true
   }
+});
+
+const RotaSchema = new Schema({
+  pontos: [Ponto]
 });
 
 module.exports = model('Rota', RotaSchema);
