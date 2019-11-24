@@ -9,9 +9,14 @@ module.exports = {
             nome,
             latitude,
             longitude
-        })
+        }).then( usuario => {
+            return res.send(usuario)
+        }).catch( err => {
+            return res.status(206).send({
+                message: "Missing field validation error"
+            });
+        });
 
-        return res.json(req.body);
     },
 
     async update(req, res) {

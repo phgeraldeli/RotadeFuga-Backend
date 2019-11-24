@@ -1,5 +1,5 @@
 pipeline {
-    
+
     agent any
 
     tools {
@@ -22,7 +22,7 @@ pipeline {
 
         stage('Testing') {
           steps {
-            echo 'Estou testando com Mocha!!!!!!'
+            sh 'yarn test'
           }
         }
 
@@ -33,7 +33,7 @@ pipeline {
             }
           }
           steps {
-            deploy()
+            echo 'Estou dando deploy'
           }
         }
 

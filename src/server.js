@@ -11,7 +11,11 @@ dotenv.config();
 mongoose.connect(
     process.env.DB_CONNECT,
     {
-        useNewUrlParser: true
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+        keepAlive: true,
+        useCreateIndex: true,
     }).then(() => {
         console.log("Connected to MongoDB...");
     }).catch(err => {
@@ -26,3 +30,4 @@ server.use(routes);
 server.use('/api/user', authRoute);
 
 server.listen(3333, () => console.log('Server up and running'));
+module.exports = server; //for testing
