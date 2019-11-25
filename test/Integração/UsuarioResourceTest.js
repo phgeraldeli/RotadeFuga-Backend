@@ -7,12 +7,12 @@ para verifyToken
 
 process.env.NODE_ENV = 'test'; //Set env variable to test
 
-const Usuario = require('../src/models/Usuario.js');
+const Usuario = require('../../src/models/Usuario.js');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const server = require('../src/server.js');
+const server = require('../../test/serverTest.js');
 const mongoose = require('mongoose');
-const usuarioController = require('../src/controllers/UsuarioController.js');
+const usuarioController = require('../../src/controllers/UsuarioController.js');
 const should = chai.should;
 
 const expect = chai.expect;
