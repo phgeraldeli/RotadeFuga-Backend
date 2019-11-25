@@ -4,7 +4,6 @@ const expect = chai.expect;
 const {registerValidation, loginValidation} = require('../../src/controllers/Validation');
 
 
-
 describe('Schemas Validation', () => {
 
 
