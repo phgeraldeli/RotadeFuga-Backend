@@ -5,6 +5,7 @@ const {
   loginValidation
 } = require("./controllers/Validation");
 const bcryptjs = require("bcryptjs");
+const { hashPassword } = require('./controllers/hashController');
 const jwt = require("jsonwebtoken");
 
 router.post("/register", async (req, res) => {
@@ -16,8 +17,9 @@ router.post("/register", async (req, res) => {
   const userExist = await Admin.findOne({ user: req.body.user });
   if (userExist) return res.status(400).send("User Already Exists");
 
-  const salt = await bcryptjs.genSalt(10);
-  const hashedPassword = await bcryptjs.hash(req.body.password, salt);
+  // const salt = await bcryptjs.genSalt(10);
+  // const hashedPassword = await bcryptjs.hash(req.body.password, salt);
+  const hashedPassword = await hashPassword(req.body.password);
 
   //CREATE A NEW ADMIN
   const admin = new Admin({
