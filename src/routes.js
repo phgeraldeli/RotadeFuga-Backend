@@ -5,10 +5,6 @@ const routes = express.Router();
 const verify = require('./controllers/verifyToken');
 
 
-routes.get('/', (req, res) => {
-    return res.json({ message: `Olá: ${req.query.name}` });
-});
-
 routes.post('/usuario', usuarioController.store);
 routes.get('/usuario', usuarioController.findAll);
 routes.put('/usuario/:userId', usuarioController.update);

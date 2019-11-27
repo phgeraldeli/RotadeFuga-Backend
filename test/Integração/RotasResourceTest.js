@@ -72,18 +72,24 @@ describe("Requests de Rota", function() {
       };
       chai
         .request(server)
-        .post("/api/user/login")
+        .post("/api/user/register")
         .send(user)
-        .end(function(err, res) {
+        .end((err, res) => {
           chai
             .request(server)
-            .post("/rotas")
-            .set("auth-token", res.headers["auth-token"])
-            .send({ pontos: [] })
-            .end(function(err, resp) {
-              expect(resp).to.have.status(200);
-              expect(resp.body).to.be.an("object");
-              done();
+            .post("/api/user/login")
+            .send(user)
+            .end(function(err, res) {
+              chai
+                .request(server)
+                .post("/rotas")
+                .set("auth-token", res.headers["auth-token"])
+                .send({ pontos: [] })
+                .end(function(err, resp) {
+                  expect(resp).to.have.status(200);
+                  expect(resp.body).to.be.an("object");
+                  done();
+                });
             });
         });
     });
@@ -94,20 +100,26 @@ describe("Requests de Rota", function() {
       };
       chai
         .request(server)
-        .post("/api/user/login")
+        .post("/api/user/register")
         .send(user)
-        .end(function(err, res) {
+        .end((err, res) => {
           chai
             .request(server)
-            .post("/rotas")
-            .set("auth-token", res.headers["auth-token"])
-            .send(routeSaved)
-            .end((err, resp) => {
-              expect(resp).to.have.status(206);
-              expect(resp.body.message).to.eql(
-                "Missing field validation error"
-              );
-              done();
+            .post("/api/user/login")
+            .send(user)
+            .end(function(err, res) {
+              chai
+                .request(server)
+                .post("/rotas")
+                .set("auth-token", res.headers["auth-token"])
+                .send(routeSaved)
+                .end((err, resp) => {
+                  expect(resp).to.have.status(206);
+                  expect(resp.body.message).to.eql(
+                    "Missing field validation error"
+                  );
+                  done();
+                });
             });
         });
     });
