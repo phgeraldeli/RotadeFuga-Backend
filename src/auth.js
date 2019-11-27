@@ -5,7 +5,7 @@ const {
   loginValidation
 } = require("./controllers/Validation");
 const bcryptjs = require("bcryptjs");
-const { hashPassword } = require('./controllers/hashController');
+const { hashPassword } = require("./controllers/hashController");
 const jwt = require("jsonwebtoken");
 
 router.post("/register", async (req, res) => {
@@ -27,12 +27,8 @@ router.post("/register", async (req, res) => {
     password: hashedPassword
   });
 
-  try {
-    const savedAdmin = await admin.save();
-    res.send({ user: savedAdmin._id });
-  } catch (error) {
-    res.status(400).send(error);
-  }
+  const savedAdmin = await admin.save();
+  res.send({ user: savedAdmin._id });
 });
 
 //LOGIN
@@ -46,12 +42,15 @@ router.post("/login", async (req, res) => {
   if (!user) return res.status(400).send("User does not exists");
 
   //PASSWORD IS CORRECT
-  const validPassword = await bcryptjs.compare(req.body.password, user.password);
+  const validPassword = await bcryptjs.compare(
+    req.body.password,
+    user.password
+  );
   if (!validPassword) return res.status(400).send("Invalid Password");
 
   // Create and assign a token
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-  res.header('auth-token', token).send(token);
+  res.header("auth-token", token).send(token);
 });
 
 module.exports = router;
