@@ -44,6 +44,17 @@ describe('Requests de Usuario', function () {
     });
   });
   describe('/Get:id', function () {
+    const user = {
+      id: 'idInvalido'
+    }
+    it('Should return 404 when id is not found', (done) => {
+      chai.request(server)
+        .get('/usuario/' + user.id)
+        .end((err,res) => {
+          expect(res).to.have.status(404);
+          done();
+        })
+    });
     it('Should return an specific user by id', function (done) {
       userSaved.save((err, user) => {
         chai.request(server)
