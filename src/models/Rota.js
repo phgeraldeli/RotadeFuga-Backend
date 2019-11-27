@@ -12,7 +12,7 @@ const Ponto = new Schema({
 });
 
 const RotaSchema = new Schema({
-  pontos: [Ponto]
+  pontos: { type: [Ponto], required: true }
 });
 
 module.exports = model('Rota', RotaSchema);

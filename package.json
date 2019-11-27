@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "nodemon src/server.js",
     "start": "nodemon src/server.js",
-    "test": "mocha 'test/**' --recursive --timeout 10000|| exit 0"
+    "test": "nyc mocha 'test/**' --recursive --timeout 10000 || exit 0"
   },
   "dependencies": {
     "@hapi/joi": "^15.0.3",
@@ -26,6 +26,7 @@
     "chai": "^4.2.0",
     "mocha": "*",
     "nodemon": "^1.19.1",
+    "nyc": "^14.1.1",
     "should": "^13.2.3"
   }
 }

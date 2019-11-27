@@ -8,7 +8,9 @@ module.exports = {
         await Rota.create({
             pontos
         }).then(rota => res.send(rota))
-            .catch(err => res.send(err))
+            .catch(err => res.status(206).send({
+                message: "Missing field validation error"
+            }))
     },
 
     async update(req, res) {
